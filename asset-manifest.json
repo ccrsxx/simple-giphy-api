@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/simple-giphy-api/static/css/main.e3cd78ce.css",
-    "main.js": "/simple-giphy-api/static/js/main.bc72e6b0.js",
+    "main.js": "/simple-giphy-api/static/js/main.63d8b69a.js",
     "index.html": "/simple-giphy-api/index.html",
     "main.e3cd78ce.css.map": "/simple-giphy-api/static/css/main.e3cd78ce.css.map",
-    "main.bc72e6b0.js.map": "/simple-giphy-api/static/js/main.bc72e6b0.js.map"
+    "main.63d8b69a.js.map": "/simple-giphy-api/static/js/main.63d8b69a.js.map"
   },
   "entrypoints": [
     "static/css/main.e3cd78ce.css",
-    "static/js/main.bc72e6b0.js"
+    "static/js/main.63d8b69a.js"
   ]
 }
