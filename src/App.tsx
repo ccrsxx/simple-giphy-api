@@ -30,7 +30,7 @@ export function App() {
     getGif();
   }, []);
 
-  const handleGifSuccess = ({
+  const loadImage = ({
     title,
     images: {
       original: { url }
@@ -38,20 +38,21 @@ export function App() {
   }: {
     title: string;
     images: { original: { url: string } };
-  }) => {
-    const img = document.querySelector('img');
+  }) =>
+    new Promise((resolve, reject) => {
+      if (!title || !url) reject();
 
-    img!.onload = () => {
-      setIsLoaded(true);
-      setIsFetching(false);
-    };
+      const image = document.querySelector('img');
 
-    img!.onerror = () => {
-      setIsLoaded(false);
-      setIsFetching(false);
-    };
+      image!.onload = resolve;
+      image!.onerror = reject;
 
-    setImageData({ title, url });
+      setImageData({ title, url });
+    });
+
+  const handleGifSuccess = () => {
+    setIsLoaded(true);
+    setIsFetching(false);
   };
 
   const handleGifError = () => {
@@ -59,16 +60,40 @@ export function App() {
     setIsLoaded(false);
   };
 
-  const getGif = (searchQuery?: string) => {
+  const getGif = async (searchQuery?: string) => {
     setIsFetching(true);
+
+    const giphyCall = `https://api.giphy.com/v1/gifs/translate?api_key=${giphy}&s=${
+      !searchQuery ? 'cats' : searchQuery
+    }`;
+
+    try {
+      // await loadImage((await (await fetch(giphyCall)).json()).data);
+      // --------------------------------------------------------------
+      // const { data } = await (await fetch(giphyCall)).json();
+      // await loadImage(data);
+      const response = await fetch(giphyCall);
+      const { data } = await response.json();
+      await loadImage(data);
+      handleGifSuccess();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      handleGifError();
+    }
+
+    /* using promise
+
     fetch(
       `https://api.giphy.com/v1/gifs/translate?api_key=${giphy}&s=${
         !searchQuery ? 'cats' : searchQuery
       }`
     )
       .then((res) => res.json())
-      .then(({ data }) => handleGifSuccess(data))
+      .then(({ data }) => loadImage(data))
+      .then(() => handleGifSuccess())
       .catch(() => handleGifError());
+     */
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

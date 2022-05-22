@@ -6,7 +6,7 @@ interface ControlProps {
 
 export function Control({ getGif, handleChange, handleSubmit }: ControlProps) {
   return (
-    <div className='grid gap-4 border-t-2 p-4'>
+    <div className='grid gap-4 border-t-2 pt-4'>
       <button
         className='rounded-md bg-red-400 px-4 py-2 transition hover:brightness-110
                    focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2'
