@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Header, Main, ImageGif, Control, Footer } from './components';
+import { Header, Main, Content, Control, Footer } from './components';
 import { giphy } from './common';
 
 interface ImageData {
@@ -105,14 +105,17 @@ export function App() {
     getGif(query);
   };
 
-  const imageKey = useMemo(() => Math.random(), [isFetching]);
+  const [currentQuery, imageKey] = useMemo(
+    () => [query, Math.random()],
+    [isFetching]
+  );
 
   return (
     <div className='flex min-h-screen flex-col items-center gap-4'>
       <Header />
       <Main>
-        <ImageGif
-          query={query}
+        <Content
+          currentQuery={currentQuery}
           isLoaded={isLoaded}
           isFetching={isFetching}
           imageKey={imageKey}

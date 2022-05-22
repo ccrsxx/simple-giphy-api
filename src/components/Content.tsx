@@ -2,7 +2,7 @@ import { InfoIcon } from './InfoIcon';
 import { VscLoading, VscWarning } from '../common';
 
 interface ImageContainerProps {
-  query: string;
+  currentQuery: string;
   isLoaded: boolean;
   isFetching: boolean;
   imageKey: number;
@@ -10,8 +10,8 @@ interface ImageContainerProps {
   url?: string;
 }
 
-export function ImageGif({
-  query,
+export function Content({
+  currentQuery,
   isLoaded,
   isFetching,
   imageKey,
@@ -26,14 +26,14 @@ export function ImageGif({
       {isFetching ? (
         <InfoIcon
           Icon={VscLoading}
-          text={`Searching for ${!query ? 'cats' : query}...`}
+          text={`Searching for ${!currentQuery ? 'cats' : currentQuery}...`}
           color='text-pink-400'
           spin
         />
       ) : !isLoaded ? (
         <InfoIcon
           Icon={VscWarning}
-          text={`No GIF found for ${!query ? 'cats' : query}!`}
+          text={`No GIF found for ${!currentQuery ? 'cats' : currentQuery}!`}
           color='text-pink-400'
         />
       ) : null}
