@@ -48,7 +48,7 @@ export function ImageGif({
           href={url}
         >
           <img
-            className='max-h-64 max-w-full rounded-md'
+            className='max-h-52 max-w-full rounded-md sm:max-h-64'
             src={url}
             alt={title}
           />
